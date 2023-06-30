@@ -70,7 +70,7 @@ public class SimpleLinkedList implements LinkedList {
 
     @Override
     public void addAt(int value, int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index "+index+" is out of bound for size "+this.size);
         }
         if (index == 0) {
