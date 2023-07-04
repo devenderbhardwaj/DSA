@@ -73,44 +73,44 @@ public final class MyString implements CharSequence, Comparable<MyString> {
         return this.length() - str.length();
     }
 
-    public boolean contains(CharSequence str) {
+    public int indexOf(CharSequence str) {
         for (int i = 0; i < charArray.length; i++) {
 
-            boolean found = true;
+            int found = i;
             for (int j = 0; j < str.length(); j++) {
                 if (charArray[i + j] != str.charAt(j)) {
-                    found = false;
+                    found = -1;
                     break;
                 }
             }
-            if (found) {
+            if (found != -1) {
                 return found;
             }
 
         }
-        return false;
+        return -1;
     }
     
-    public boolean contains(CharSequence sequence, boolean caseSensitive) {
+    public int indexOf(CharSequence sequence, boolean caseSensitive) {
         if (caseSensitive) {
-            return this.contains(sequence);
+            return this.indexOf(sequence);
         }
         MyString ms = new MyString(sequence).toLowerCase();
         for (int i = 0; i < charArray.length; i++) {
 
-            boolean found = true;
+            int found = i;
             for (int j = 0; j < ms.length(); j++) {
                 if (charArray[i + j] != ms.charAt(j)) {
-                    found = false;
+                    found = -1;
                     break;
                 }
             }
-            if (found) {
+            if (found != -1) {
                 return found;
             }
 
         }
-        return false;
+        return -1;
     }
 
     @Override
