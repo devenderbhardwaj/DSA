@@ -98,7 +98,11 @@ public final class MyString implements CharSequence {
         }
         return false;
     }
-    private boolean containsIgnoreCase(CharSequence sequence) {
+    
+    public boolean contains(CharSequence sequence, boolean caseSensitive) {
+        if (caseSensitive) {
+            return this.contains(sequence);
+        }
         MyString ms = new MyString(sequence).toLowerCase();
         for (int i = 0; i < charArray.length; i++) {
 
@@ -116,15 +120,6 @@ public final class MyString implements CharSequence {
         }
         return false;
     }
-
-    public boolean contains(CharSequence sequence, boolean caseSensitive) {
-        if (caseSensitive) {
-            return this.contains(sequence);
-        }
-        return containsIgnoreCase(sequence);
-    }
-
-
 
     @Override
     public char charAt(int index) {
