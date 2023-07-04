@@ -149,8 +149,8 @@ public final class MyString implements CharSequence {
             throw new IllegalArgumentException("Start " + start + " is more then end " + end);
         }
         char[] temp = new char[end - start];
-        for (int i = start; i < end; i++) {
-            temp[i] = charArray[i];
+        for (int i = 0; i < end - start; i++) {
+            temp[i] = charArray[i + start];
         }
         return new MyString(temp);
     }
