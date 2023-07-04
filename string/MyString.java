@@ -1,6 +1,6 @@
 package string;
 
-public final class MyString implements CharSequence {
+public final class MyString implements CharSequence, Comparable<MyString> {
     private final char[] charArray;
 
     public MyString(CharSequence charSequence) {
@@ -61,24 +61,16 @@ public final class MyString implements CharSequence {
         return new MyString(temp);
     }
 
-    
+    @Override
     public int compareTo(MyString str) {
-        char[] smaller, bigger;
-        if (this.length() > str.length()) {
-            bigger = this.charArray;
-            smaller = str.charArray;
-        } else {
-            bigger = str.charArray;
-            smaller = this.charArray;
-        }
-        for (int i = 0; i < smaller.length; i++) {
-            if (bigger[i] > smaller[i]) {
+        for (int i = 0, j = 0; i < this.charArray.length && j < str.charArray.length; i++, j++) {
+            if (this.charArray[i] > str.charArray[j]) {
                 return 1;
-            } else if (bigger[i] < smaller[i]) {
+            } else if (this.charArray[i] < str.charArray[j]) {
                 return -1;
             }
         }
-        return bigger.length - smaller.length;
+        return this.length() - str.length();
     }
 
     public boolean contains(CharSequence str) {
@@ -154,5 +146,7 @@ public final class MyString implements CharSequence {
         }
         return new MyString(temp);
     }
+
+    
 
 }
