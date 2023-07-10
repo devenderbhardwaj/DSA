@@ -1,0 +1,81 @@
+package tree;
+
+public class BST {
+    private class Node {
+        int value;
+        Node left, right;
+
+        Node(int value, Node left, Node right) {
+            this.value = value;
+            this.left = left;
+            this.right = right;
+        }
+
+        Node(int e) {
+            this.value = e;
+            left = right = null;
+        }
+    }
+
+    Node root;
+
+    public BST() {
+        root = null;
+    }
+
+    public BST(int e) {
+        root = new Node(e);
+    }
+
+    public void insert(int e) {
+        root = insert (e, this.root);
+    }
+
+    private Node insert(int e, Node node) {
+        if (node == null) {
+            node = new Node(e);
+            return node;
+        }
+        if (node.value > e) {
+            node.left = insert(e, node.left);
+            
+        } else if (node.value < e) {
+            node.right = insert(e, node.right);
+        }
+        return node;
+    }
+
+    public void inOrder() {
+        inOrder(this.root);
+    }
+    private void inOrder(Node node) {
+        if (node == null) {
+            return ;
+        }
+        inOrder(node.left);
+        System.out.println(node.value);
+        inOrder(node.right);
+    }
+    public void postOrder() {
+        postOrder(this.root);
+    }
+    private void postOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.println(node.value);
+    }
+    public void preOrder() {
+        preOrder(this.root);
+    }
+    private void preOrder(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.value);
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+}
