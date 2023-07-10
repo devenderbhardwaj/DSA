@@ -91,4 +91,34 @@ public class BST {
         preOrder(node.left);
         preOrder(node.right);
     }
+    public void delete(int e) {
+        this.root = delete(this.root, e);
+    }
+    private Node delete(Node node, int e) {
+        if (node == null) {
+            return node;
+        }
+        if (e < node.value) {
+            node.left = delete(node.left, e) ;
+            return node;
+        } else if (e > node.value) {
+            node.right = delete(node.right, e);
+            return node;
+        }
+        if (node.right == null) {
+            return node.left;
+        } else if  (node.left == null) {
+            return node.right;
+        }
+        node.value = inOrderSuccessor(node.right).value;
+        node.right = delete(node.right, node.value);
+        node.right = node.right;
+        return node ;
+    }
+    private Node inOrderSuccessor(Node node) {
+        if (node.left == null) {
+            return node;
+        }
+        return inOrderSuccessor(node.left);
+    }
 }
