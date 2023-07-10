@@ -30,7 +30,20 @@ public class BST {
     public void insert(int e) {
         root = insert (e, this.root);
     }
-
+    public boolean search(int e) {
+        return search(this.root, e);
+    }
+    private boolean search(Node node, int e) {
+        if (node == null) {
+            return false;
+        }
+        if (e > node.value) {
+            return search(node.right, e);
+        } else if (e < node.value) {
+            return search(node.left, e);
+        }
+        return true;
+    }
     private Node insert(int e, Node node) {
         if (node == null) {
             node = new Node(e);
