@@ -6,12 +6,10 @@ public class SimpleStack implements Stack {
     private int[] stack;
     private int top;
 
-    @Override
     public int getLength() {
         return top + 1;
     }
 
-    @Override
     public int getCapacity() {
         return this.stack.length;
     }
@@ -51,7 +49,7 @@ public class SimpleStack implements Stack {
     }
 
     @Override
-    public void empty() {
+    public void clear() {
         top = -1;
     }
     @Override
@@ -61,15 +59,7 @@ public class SimpleStack implements Stack {
         }
         return stack[top];
     }
-    @Override
-    public int search(int value) {
-        for (int i = 0; i <= top; ++i) {
-            if (stack[i] == value) {
-                return i;
-            }
-        }
-        return -1;
-    }
+    
     @Override
     public String toString() {
         if (top == -1) {
@@ -83,7 +73,6 @@ public class SimpleStack implements Stack {
         return str;
     }
 
-    @Override
     public boolean isFull() {
         return stack.length == top - 1;
     }
