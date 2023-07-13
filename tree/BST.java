@@ -5,12 +5,6 @@ public class BST {
         int value;
         Node left, right;
 
-        Node(int value, Node left, Node right) {
-            this.value = value;
-            this.left = left;
-            this.right = right;
-        }
-
         Node(int e) {
             this.value = e;
             left = right = null;
