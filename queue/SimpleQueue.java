@@ -63,12 +63,10 @@ public class SimpleQueue implements Queue {
         return front == -1;
     }
 
-    @Override
     public boolean isFull() {
         return (rear + 1) % queue.length == front;
     }
 
-    @Override
     public int size() {
         if (front <= rear) {
             return rear - front + 1;

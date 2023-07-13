@@ -1,11 +1,8 @@
 package queue;
 
 public interface Queue {
-    boolean isFull() ;
 
     boolean isEmpty() ;
-
-    int size() ;
 
     int front() ;
 

@@ -5,24 +5,10 @@ import java.util.NoSuchElementException;
 import linkedList.SimpleLinkedList;
 
 public class QueueUsingLinkedList implements Queue{
-    private static final int DEFAULT_QUEUE_LENGTH = 10;
     SimpleLinkedList queue ;
-    int capacity ;
-
 
     public QueueUsingLinkedList() {
         queue = new SimpleLinkedList();
-        capacity = DEFAULT_QUEUE_LENGTH;
-    }
-
-    public QueueUsingLinkedList(int capacity) {
-        queue = new SimpleLinkedList();
-        this.capacity = capacity;
-    }
-
-    @Override
-    public boolean isFull() {
-        return queue.getSize() == capacity;
     }
 
     @Override
@@ -30,7 +16,6 @@ public class QueueUsingLinkedList implements Queue{
         return queue.getSize() == 0;
     }
 
-    @Override
     public int size() {
         return queue.getSize();
     }
@@ -53,9 +38,6 @@ public class QueueUsingLinkedList implements Queue{
 
     @Override
     public void enqueue(int e) {
-        if (queue.getSize() == capacity) {
-            throw new IllegalStateException("List is full");
-        }
         queue.add(e);
     }
 
