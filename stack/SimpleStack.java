@@ -74,6 +74,6 @@ public class SimpleStack implements Stack {
     }
 
     public boolean isFull() {
-        return stack.length == top - 1;
+        return stack.length -1 == top ;
     }
 }
