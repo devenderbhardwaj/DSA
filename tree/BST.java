@@ -1,33 +1,26 @@
 package tree;
 
 public class BST {
-    private class Node {
-        int value;
-        Node left, right;
-
-        Node(int e) {
-            this.value = e;
-            left = right = null;
-        }
-    }
-
-    Node root;
+    
+    private TreeNode root;
 
     public BST() {
         root = null;
     }
 
     public BST(int e) {
-        root = new Node(e);
+        root = new TreeNode(e);
     }
-
+    public TreeNode getRoot() {
+        return root;
+    }
     public void insert(int e) {
         root = insert (e, this.root);
     }
     public boolean search(int e) {
         return search(this.root, e);
     }
-    private boolean search(Node node, int e) {
+    private boolean search(TreeNode node, int e) {
         if (node == null) {
             return false;
         }
@@ -38,9 +31,9 @@ public class BST {
         }
         return true;
     }
-    private Node insert(int e, Node node) {
+    private TreeNode insert(int e, TreeNode node) {
         if (node == null) {
-            node = new Node(e);
+            node = new TreeNode(e);
             return node;
         }
         if (node.value > e) {
@@ -55,7 +48,7 @@ public class BST {
     public void inOrder() {
         inOrder(this.root);
     }
-    private void inOrder(Node node) {
+    private void inOrder(TreeNode node) {
         if (node == null) {
             return ;
         }
@@ -66,7 +59,7 @@ public class BST {
     public void postOrder() {
         postOrder(this.root);
     }
-    private void postOrder(Node node) {
+    private void postOrder(TreeNode node) {
         if (node == null) {
             return;
         }
@@ -77,7 +70,7 @@ public class BST {
     public void preOrder() {
         preOrder(this.root);
     }
-    private void preOrder(Node node) {
+    private void preOrder(TreeNode node) {
         if (node == null) {
             return;
         }
@@ -88,7 +81,7 @@ public class BST {
     public void delete(int e) {
         this.root = delete(this.root, e);
     }
-    private Node delete(Node node, int e) {
+    private TreeNode delete(TreeNode node, int e) {
         if (node == null) {
             return node;
         }
@@ -109,7 +102,7 @@ public class BST {
         node.right = node.right;
         return node ;
     }
-    private Node inOrderSuccessor(Node node) {
+    private TreeNode inOrderSuccessor(TreeNode node) {
         if (node.left == null) {
             return node;
         }
