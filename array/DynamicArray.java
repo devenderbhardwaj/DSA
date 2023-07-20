@@ -6,7 +6,7 @@ public class DynamicArray implements Iterable<Integer> {
     private int[] integers;
     private int capacity;
     private int length = 0;
-    private final int CAPACITY_INCREASE_STEP = 3;
+    private final int CAPACITY_INCREASE_STEP = 10;
 
     public DynamicArray(int capacity) {
         integers = new int[capacity];
