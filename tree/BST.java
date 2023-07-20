@@ -1,5 +1,9 @@
 package tree;
 
+import java.util.LinkedList;
+
+import array.DynamicArray;
+
 public class BST {
     
     private TreeNode root;
@@ -107,5 +111,41 @@ public class BST {
             return node;
         }
         return inOrderSuccessor(node.left);
+    }
+
+    public DynamicArray depthFirstTraverse() {
+        DynamicArray dArray = new DynamicArray();
+
+        // We don't have generic stack so using java.util.LinkedList
+        LinkedList<TreeNode> stack = new LinkedList<>();
+        stack.push(root);
+        while (stack.size() != 0) {
+            TreeNode node = stack.pop();
+            if (node != null) {
+                dArray.add(node.value);
+                stack.push(node.right);
+                stack.push(node.left);
+            }
+        }
+        return dArray;
+    }
+
+    public DynamicArray breadthFirstTraverse() {
+        DynamicArray dArray = new DynamicArray();
+
+        // We don't have generic linkedlist so using java.util.LinkedList
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.push(root);
+        while (queue.size() != 0) {
+            TreeNode node = queue.removeFirst();
+            if (node != null) {
+                dArray.add(node.value);
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+        }
+
+        return dArray;
+
     }
 }
