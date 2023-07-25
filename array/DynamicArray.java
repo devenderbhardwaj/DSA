@@ -102,7 +102,7 @@ public class DynamicArray implements Iterable<Integer> {
     }
 
     //Same as Arrays.toString()
-    private String arrayString() {
+    public String arrayString() {
         if (this.length == 0) {
             return "[]";
         }
@@ -112,6 +112,15 @@ public class DynamicArray implements Iterable<Integer> {
         }
         str += integers[this.length - 1] + "]";
         return str;
+    }
+
+    public int search(int e) {
+        for (int i = 0; i < integers.length; i++) {
+            if (integers[i] == e) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override
