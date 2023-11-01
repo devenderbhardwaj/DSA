@@ -115,6 +115,8 @@ public class StringBuilder implements CharSequence {
         }
         int seqLen = sequence.length();
         ensureCapacity(this.length + sequence.length());
+
+        //Shifting existing charaters
         for (int i = this.length  - 1; i >= index; i--) {
             charArray[i+seqLen] = charArray[i];
         }
@@ -179,9 +181,7 @@ public class StringBuilder implements CharSequence {
             temp[i] = charArray[i];
         }
         return new String(temp);
-    }
-
-    
+    }    
 
     @Override
     public int length() {

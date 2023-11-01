@@ -95,12 +95,13 @@ public final class MyString implements CharSequence, Comparable<MyString> {
         if (caseSensitive) {
             return this.indexOf(sequence);
         }
-        MyString ms = new MyString(sequence).toLowerCase();
-        for (int i = 0; i < charArray.length; i++) {
+        MyString s = new MyString(sequence).toLowerCase();
+        MyString ms = this.toLowerCase();
+        for (int i = 0; i < ms.length(); i++) {
 
             int found = i;
-            for (int j = 0; j < ms.length(); j++) {
-                if (charArray[i + j] != ms.charAt(j)) {
+            for (int j = 0; j < s.length(); j++) {
+                if (ms.charAt(i+j) != s.charAt(j)) {
                     found = -1;
                     break;
                 }
@@ -146,7 +147,4 @@ public final class MyString implements CharSequence, Comparable<MyString> {
         }
         return new MyString(temp);
     }
-
-    
-
 }
