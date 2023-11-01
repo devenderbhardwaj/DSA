@@ -1,125 +1,92 @@
 package hashtable;
 
 import java.util.Iterator;
+
 /**
  * This is not a very good implementation because:
  * <ol>
- *  <li>Not enough tested</li>
- *  <li>It does not grow array size so not efficient for sizes larget then 
- *  default capacity</li>
+ * <li>Not enough tested</li>
+ * <li>It does not grow array size so not efficient for sizes larget then
+ * default capacity</li>
  * </ol>
  * Any suggestions are welcome to improve
  */
-public class HashTable{
-    private class SimpleLinkedList implements Iterable<Integer>{
+public class HashTable {
+    private class LinkedList implements Iterable<Integer> {
 
         private class Node {
-            private String key;
-            private int value;
-            private Node nextNode;
+            String key;
+            int value;
+            Node nextNode;
 
             Node(String key, int value, Node nextNode) {
                 this.key = key;
                 this.value = value;
                 this.nextNode = nextNode;
             }
-
-            public String getKey() {
-                return key;
-            }
-
-            public int getValue() {
-                return value;
-            }
-
-            public void setValue(int value) {
-                this.value = value;
-            }
-
-            public Node getNextNode() {
-                return nextNode;
-            }
-
-            public void setNextNode(Node nextNode) {
-                this.nextNode = nextNode;
-            }
         }
 
         private Node head;
-        private Node tail;
-        private int size = 0;
 
-        public SimpleLinkedList() {
-            head = tail = null;
+        public LinkedList() {
+            head = null;
         }
 
-        public boolean add(String key, int value) {
-            if (update(key, value)) {
-                return true;
+        public void put(String key, int value) {
+            if (this.head == null) {
+                this.head = new Node(key, value, null);
+                return ;
             }
-            
-            Node node = new Node(key, value, null);
-            if (head == null) {
-                head = tail = node;
-            } else {
-                this.tail.setNextNode(node);
-                this.tail = node;
+            Node node = this.head;
+            if (node.key.equals(key)) {
+                node.value = value;
+                return ;
             }
-            ++size;
-            return true;
-        }
-
-        public int getSize() {
-            return this.size;
-        }
-
-        public boolean update(String key, int value) {
-            Node toUpdate = this.head;
-            for (int i = 0; i < this.getSize(); ++i) {
-                if (toUpdate.getKey() == key) {
-                    toUpdate.setValue(value);
-                    return true;
+            while (node.nextNode != null) {
+                if (node.nextNode.key.equals(key)) {
+                    node.nextNode.value = value;
+                    return ;
                 }
-                toUpdate = toUpdate.getNextNode();
+                node = node.nextNode;
             }
-            return false;
+            node.nextNode = new Node(key, value, null);
         }
 
         public boolean delete(String key) {
             Node node = this.head;
-            if (node.getKey() == key ) {
-                this.head = node.getNextNode();
-                --size;
+            if (node == null) {
+                return false;
+            }
+            if (node.key.equals(key)) {
+                this.head = node.nextNode;
                 return true;
             }
-            for (int i = 0; i < this.getSize()-1; i++) {
-                if (node.getNextNode().getKey() == key) {
-                    node.setNextNode(node.getNextNode().getNextNode());
-                    --size;
+            while (node.nextNode != null) {
+                if (node.nextNode.key.equals(key)) {
+                    node.nextNode = node.nextNode.nextNode;
                     return true;
                 }
+                node = node.nextNode;
             }
             return false;
         }
 
-        
-
         public Integer get(String key) {
             Node node = this.head;
-            while (node != null && !(node.key == key)) {
-                node = node.getNextNode();
+            while (node != null && !(node.key.equals(key))) {
+                node = node.nextNode;
             }
-            return node==null?null:node.getValue();
+            return node == null ? null : node.value;
         }
 
-        
         public int search(String key) {
             Node node = this.head;
-            for (int i = 0; i < this.size; ++i) {
-                if (node.getKey() == key) {
+            int i = 0;
+            while (node != null) {
+                if (node.key.equals(key)) {
                     return i;
                 }
-                node = node.getNextNode();
+                ++i;
             }
             return -1;
         }
@@ -130,22 +97,20 @@ public class HashTable{
                 return "[]";
             }
             Node node = this.head;
-            String str = "[";
-            while (node.getNextNode() != null) {
-                str += "{";
-                str += node.getKey() + ":";
-                str += node.getValue() + "}, ";
+            StringBuilder sb = new StringBuilder("]");
+            while (node.nextNode != null) {
+                sb.append("{").append(node.key).append(" : ").append(node.value).append("}, ");
+                node = node.nextNode;
             }
-            str += "{";
-            str += node.getKey() + ":";
-            str += node.getValue() + "} ] ";
-            return str;
+            sb.append("{").append(node.key).append(" : ").append(node.value).append("}]");
+            return sb.toString();
         }
 
         @Override
         public Iterator<Integer> iterator() {
             return new Iterator<Integer>() {
-                Node node = SimpleLinkedList.this.head;
+                Node node = LinkedList.this.head;
+
                 @Override
                 public boolean hasNext() {
                     return node != null;
@@ -153,57 +118,58 @@ public class HashTable{
 
                 @Override
                 public Integer next() {
-                    int temp = node.getValue();
-                    node = node.getNextNode();
+                    int temp = node.value;
+                    node = node.nextNode;
                     return temp;
                 }
-                
+
             };
         }
 
     }
 
-    SimpleLinkedList[] array ;
+    LinkedList[] array;
+    private final int LEN = 100;
 
     public HashTable() {
-        array = new SimpleLinkedList[100];
+        array = new LinkedList[LEN];
     }
 
-    public  boolean put(String key, int value) {
+    public void put(String key, int value) {
         int code = key.hashCode();
-        if (array[code%100] == null) {
-            array[code%100] = new SimpleLinkedList();
+        if (array[Math.abs(code % LEN)] == null) {
+            array[Math.abs(code % LEN)] = new LinkedList();
         }
-        return array[code%100].add(key, value);
+        array[Math.abs(code % LEN)].put(key, value);
     }
 
-    public Integer getValue(String key) {
+    public Integer get(String key) {
         int code = key.hashCode();
-        if (array[code%100] == null) {
+        if (array[Math.abs(code % LEN)] == null) {
             return null;
         }
-        return array[code%100].get(key);
+        return array[Math.abs(code % LEN)].get(key);
     }
 
     public boolean remove(String key) {
         int code = key.hashCode();
-        if (array[code%100] == null) {
+        if (array[Math.abs(code % LEN)] == null) {
             return false;
         }
-        return array[code%100].delete(key);
+        return array[Math.abs(code % LEN)].delete(key);
     }
-    
+
     public boolean containsKey(String key) {
         int code = key.hashCode();
-        if (array[code%100] == null) {
+        if (array[Math.abs(code % LEN)] == null) {
             return false;
         }
-        return array[code%100].search(key) != -1;
+        return array[Math.abs(code % LEN)].search(key) != -1;
     }
 
     public void traverse() {
         for (int i = 0; i < array.length; i++) {
-            SimpleLinkedList sl = array[i];
+            LinkedList sl = array[i];
             if (sl != null) {
                 for (Integer integer : sl) {
                     System.out.println(integer);
