@@ -6,7 +6,7 @@ public class DynamicArray implements Iterable<Integer> {
     private int[] integers;
     private int capacity;
     private int length = 0;
-    private final int CAPACITY_INCREASE_STEP = 10;
+    private final double CAPACITY_INCREASE_FACTOR = 2;
 
     public DynamicArray(int capacity) {
         integers = new int[capacity];
@@ -83,7 +83,7 @@ public class DynamicArray implements Iterable<Integer> {
                 integers[i] = integers[i + 1];
             }
             --this.length;
-            if (this.capacity - this.length > CAPACITY_INCREASE_STEP) {
+            if (this.capacity/this.length > CAPACITY_INCREASE_FACTOR) {
                 this.decreaseCapacity();
             }
         }
@@ -95,7 +95,7 @@ public class DynamicArray implements Iterable<Integer> {
 
     private void increaseCapacity() {
         try {
-            this.setCapacity(this.length + CAPACITY_INCREASE_STEP);
+            this.setCapacity((int) Math.ceil(this.length * CAPACITY_INCREASE_FACTOR));
         } catch (Exception e) {
             e.printStackTrace();
         }
