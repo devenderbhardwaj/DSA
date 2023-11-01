@@ -165,8 +165,8 @@ public final class BetterString implements CharSequence, Comparable<BetterString
 
     @Override
     public char charAt(int index) {
-        if (index < 0 || index >= charArray.length) {
-            throw new IndexOutOfBoundsException("Index " + index + " out of bound for lenght " + charArray.length);
+        if (index < 0 || index >= offset + length) {
+            throw new IndexOutOfBoundsException("Index " + index + " out of bound for length " + length);
         }
         return charArray[offset + index];
     }
