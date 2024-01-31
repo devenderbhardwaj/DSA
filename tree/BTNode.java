@@ -1,10 +1,10 @@
 package tree;
 
-public class TreeNode {
+public class BTNode {
         int value;
-        TreeNode left, right;
+        BTNode left, right;
 
-        TreeNode(int e) {
+        BTNode(int e) {
             this.value = e;
             left = right = null;
         }

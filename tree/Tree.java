@@ -6,7 +6,7 @@ public abstract class Tree {
      * @param node
      * @return Depth of node in tree
      */
-    public static int depth(TreeNode node) {
+    public static int depth(BTNode node) {
         if (node == null) {
             return -1;
         }
@@ -23,13 +23,13 @@ public abstract class Tree {
      * @param node
      * @return numbers of nodes in tree with root <b>node</b>
      */
-    public static int numberOfNodes(TreeNode node) {
+    public static int numberOfNodes(BTNode node) {
         if (node == null) {
             return 0;
         }
         return 1 + numberOfNodes(node.left) + numberOfNodes(node.right);
     }
-    public static boolean isFullBinaryTree(TreeNode root) {
+    public static boolean isFullBinaryTree(BTNode root) {
         if (root == null || (root.left == null && root.right == null)) {
             return true;
         }
@@ -39,10 +39,10 @@ public abstract class Tree {
         return false;
     }
 
-    public static boolean isPerfectBinaryTree(TreeNode root) {
+    public static boolean isPerfectBinaryTree(BTNode root) {
         return isPerfectBinaryTree(root, depth(root), 0);
     }
-    private static boolean isPerfectBinaryTree(TreeNode node, int depth , int level) {
+    private static boolean isPerfectBinaryTree(BTNode node, int depth , int level) {
         if (node == null) {
             return true;
         }
@@ -55,10 +55,10 @@ public abstract class Tree {
         return isPerfectBinaryTree(node.left, depth, level+1) && isPerfectBinaryTree(node.right, depth, level+1);
     }
 
-    public static boolean isCompleteBinaryTree(TreeNode root) {
+    public static boolean isCompleteBinaryTree(BTNode root) {
         return isCompleteBinaryTree(root, 0, numberOfNodes(root));
     }
-    private static boolean isCompleteBinaryTree(TreeNode node, int index, int numberOfNodes) {
+    private static boolean isCompleteBinaryTree(BTNode node, int index, int numberOfNodes) {
         if (node == null ) {
             return true;
         }

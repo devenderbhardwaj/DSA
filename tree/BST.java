@@ -6,16 +6,16 @@ import array.DynamicArray;
 
 public class BST {
     
-    private TreeNode root;
+    private BTNode root;
 
     public BST() {
         root = null;
     }
 
     public BST(int e) {
-        root = new TreeNode(e);
+        root = new BTNode(e);
     }
-    public TreeNode getRoot() {
+    public BTNode getRoot() {
         return root;
     }
     public void insert(int e) {
@@ -24,7 +24,7 @@ public class BST {
     public boolean search(int e) {
         return search(this.root, e);
     }
-    private boolean search(TreeNode node, int e) {
+    private boolean search(BTNode node, int e) {
         if (node == null) {
             return false;
         }
@@ -35,9 +35,9 @@ public class BST {
         }
         return true;
     }
-    private TreeNode insert(int e, TreeNode node) {
+    private BTNode insert(int e, BTNode node) {
         if (node == null) {
-            node = new TreeNode(e);
+            node = new BTNode(e);
             return node;
         }
         if (node.value > e) {
@@ -52,7 +52,7 @@ public class BST {
     public void inOrder() {
         inOrder(this.root);
     }
-    private void inOrder(TreeNode node) {
+    private void inOrder(BTNode node) {
         if (node == null) {
             return ;
         }
@@ -63,7 +63,7 @@ public class BST {
     public void postOrder() {
         postOrder(this.root);
     }
-    private void postOrder(TreeNode node) {
+    private void postOrder(BTNode node) {
         if (node == null) {
             return;
         }
@@ -74,7 +74,7 @@ public class BST {
     public void preOrder() {
         preOrder(this.root);
     }
-    private void preOrder(TreeNode node) {
+    private void preOrder(BTNode node) {
         if (node == null) {
             return;
         }
@@ -85,7 +85,7 @@ public class BST {
     public void delete(int e) {
         this.root = delete(this.root, e);
     }
-    private TreeNode delete(TreeNode node, int e) {
+    private BTNode delete(BTNode node, int e) {
         if (node == null) {
             return node;
         }
@@ -106,7 +106,7 @@ public class BST {
         node.right = node.right;
         return node ;
     }
-    private TreeNode inOrderSuccessor(TreeNode node) {
+    private BTNode inOrderSuccessor(BTNode node) {
         if (node.left == null) {
             return node;
         }
@@ -117,10 +117,10 @@ public class BST {
         DynamicArray dArray = new DynamicArray();
 
         // We don't have generic stack so using java.util.LinkedList
-        LinkedList<TreeNode> stack = new LinkedList<>();
+        LinkedList<BTNode> stack = new LinkedList<>();
         stack.push(root);
         while (stack.size() != 0) {
-            TreeNode node = stack.pop();
+            BTNode node = stack.pop();
             if (node != null) {
                 dArray.add(node.value);
                 stack.push(node.right);
@@ -134,10 +134,10 @@ public class BST {
         DynamicArray dArray = new DynamicArray();
 
         // We don't have generic linkedlist so using java.util.LinkedList
-        LinkedList<TreeNode> queue = new LinkedList<>();
+        LinkedList<BTNode> queue = new LinkedList<>();
         queue.push(root);
         while (queue.size() != 0) {
-            TreeNode node = queue.removeFirst();
+            BTNode node = queue.removeFirst();
             if (node != null) {
                 dArray.add(node.value);
                 queue.add(node.left);
