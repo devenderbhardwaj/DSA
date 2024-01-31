@@ -1,8 +1,8 @@
 package tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-import array.DynamicArray;
 
 public class BST {
     
@@ -113,8 +113,8 @@ public class BST {
         return inOrderSuccessor(node.left);
     }
 
-    public DynamicArray depthFirstTraverse() {
-        DynamicArray dArray = new DynamicArray();
+    public ArrayList<Integer> depthFirstTraverse() {
+        ArrayList<Integer> dArray = new ArrayList<>();
 
         // We don't have generic stack so using java.util.LinkedList
         LinkedList<BTNode> stack = new LinkedList<>();
@@ -130,10 +130,9 @@ public class BST {
         return dArray;
     }
 
-    public DynamicArray breadthFirstTraverse() {
-        DynamicArray dArray = new DynamicArray();
+    public ArrayList<Integer> breadthFirstTraverse() {
+        ArrayList<Integer> dArray = new ArrayList<>();
 
-        // We don't have generic linkedlist so using java.util.LinkedList
         LinkedList<BTNode> queue = new LinkedList<>();
         queue.push(root);
         while (queue.size() != 0) {
