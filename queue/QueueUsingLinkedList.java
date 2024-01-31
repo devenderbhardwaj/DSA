@@ -1,28 +1,28 @@
 package queue;
 
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
-import linkedList.SimpleLinkedList;
 
 public class QueueUsingLinkedList implements Queue{
-    SimpleLinkedList queue ;
+    LinkedList<Integer> queue ;
 
     public QueueUsingLinkedList() {
-        queue = new SimpleLinkedList();
+        queue = new LinkedList<>();
     }
 
     @Override
     public boolean isEmpty() {
-        return queue.getSize() == 0;
+        return queue.size() == 0;
     }
 
     public int size() {
-        return queue.getSize();
+        return queue.size();
     }
 
     @Override
     public int front() {
-        if (queue.getSize() == 0) {
+        if (queue.size() == 0) {
             throw new NoSuchElementException("Queue is Empty");
         }
         return queue.getFirst();
@@ -30,7 +30,7 @@ public class QueueUsingLinkedList implements Queue{
 
     @Override
     public int rear() {
-        if (queue.getSize() == 0) {
+        if (queue.size() == 0) {
             throw new NoSuchElementException("Queue is Empty");
         }
         return queue.getLast();
@@ -43,12 +43,10 @@ public class QueueUsingLinkedList implements Queue{
 
     @Override
     public int dequeue() {
-        if (queue.getSize() == 0) {
+        if (queue.size() == 0) {
             throw new IllegalStateException("List is Empty");
         }
-        int temp  = queue.getFirst();
-        queue.deleteFirst();
-        return temp;
+        return queue.removeFirst();
     }
     
     @Override
