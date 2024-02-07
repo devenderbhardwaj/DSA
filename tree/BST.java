@@ -116,7 +116,6 @@ public class BST {
     public ArrayList<Integer> depthFirstTraverse() {
         ArrayList<Integer> dArray = new ArrayList<>();
 
-        // We don't have generic stack so using java.util.LinkedList
         LinkedList<BTNode> stack = new LinkedList<>();
         stack.push(root);
         while (stack.size() != 0) {
